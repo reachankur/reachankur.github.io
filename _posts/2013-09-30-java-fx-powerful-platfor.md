@@ -1,21 +1,6 @@
 ---
 layout: post
 title: Java FX | A Powerful Platform
-date: 2013-09-30 11:36:00.000000000 +05:30
-categories: []
-tags:
-- JavaFX
-- technical
-status: publish
-type: post
-published: true
-meta:
--  blogger_bid: '2279754227642197645'
--  blogger_blog: ankurthetechie.blogspot.com
--  blogger_id: '8291541694839871250'
--  blogger_author: g116451164261752827176
--  blogger_comments: '0'
--  blogger_permalink: /2013/09/java-fx-powerful-platform.html
 ---
 <div dir="ltr" style="text-align: left;" trbidi="on">
 <div class="Pa18" style="margin-bottom: 8.0pt;">
