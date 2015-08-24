@@ -31,8 +31,6 @@ author:
   display_name: admin@reportlingo
   first_name: Ankur
   last_name: Gupta
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
 ---
 <div dir="ltr" style="text-align: left;">
 I wanted to document the process from a long time but due to crunch of time I could not, but now I will like to explain the process in simple easy to follow steps.First of all I would like to give an idea to problem addressed in the blog, basically when a report runs as a daily status or daily count one need not run it manually it could be scheduled, but when the report is scheduled the export in desired form is exported on jasper server.</p>
