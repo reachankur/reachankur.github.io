@@ -1,0 +1,322 @@
+---
+layout: post
+title: M101 MongoDB for Java Developers' final exam Answer(M101J)
+date: 2013-09-20 17:57:00.000000000 +05:30
+categories: []
+tags:
+- Final Exam
+- M101J
+- m101j final exam answers
+- MongoDB
+- MongoDB Final Exam Answers
+- MongoDB for Java Developers
+- technical
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '8391140581667576206'
+  blogger_author: g116451164261752827176
+  blogger_comments: '42'
+  blogger_permalink: /2013/09/final-exam-answers-with-explanation-for.html
+  blogger_thumbnail: http://1.bp.blogspot.com/-vmO3TOXBLnk/Ujxtp5oIYYI/AAAAAAAAALg/zBKBOSRabYc/s400/Untitled.png
+  _thumbnail_id: '93'
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Here I am providing the answers for FINAL exam M101J,which I found out upon solving.Hope you use it wisely, my point of discussing each of the questions is that everyone could check which point are they going wrong and yes I could also get a better solution than mine. So please use it as a extra check after you have solved the question once on your part so that the explanations benefit you the most.</p>
+<p>
+<b>Question 1 :&nbsp;</b><br />
+Here we need to query the enron dataset&nbsp;calculate the number of messages sent by Andrew Fastow, CFO, to Jeff Skilling, the president. Andrew Fastow's email addess was andrew.fastow@enron.com. Jeff Skilling's email was jeff.skilling@enron.com</p>
+<p>So for this first we need to download the enron zip/tar and then import in the mongoDB database name <b>enron </b>and collection name <b>messages . </b>Command for import</p>
+<p><b>mongoimport -d enron -c messages &gt; enron.json</b></p>
+<p>Now switch to mongo Shell &nbsp;commands:<br />
+<b>use enron</b><br />
+<b>db.messages.find({"headers.To":"</b>andrew.fastow@enron.com<b style="font-family: 'PT Sans', Helvetica, Arial, sans-serif; line-height: 22px;">","headers.From":"</b>jeff.skilling@enron.com<b style="font-family: 'PT Sans', Helvetica, Arial, sans-serif; line-height: 22px;">"}).count()</b><br />
+This will produce the answer as<b> 3</b><br />
+<b><br /></b><br />
+<b><br /></b><br /></p>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-vmO3TOXBLnk/Ujxtp5oIYYI/AAAAAAAAALg/zBKBOSRabYc/s1600/Untitled.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="182" src="assets/Untitled.png" width="400" /></a></div>
+<p><b><br /></b><br />
+<b><br /></b></p>
+<p><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7121024062452200" data-ad-slot="5555787179"></ins></p>
+<p>(adsbygoogle = window.adsbygoogle || []).push({});</p>
+<p><b>Question 2:</b><br />
+Please use the Enron dataset you imported for the previous problem. For this question you will use the aggregation framework to figure out pairs of people that tend to communicate a lot. To do this, you will need to unwind the To list for each message.</p>
+<p>The mongo shell command which will&nbsp;retrieve&nbsp;the desired answer would be&nbsp;<br />
+db.messages.aggregate([<br />
+{<br />
+$project: {<br />
+from: "$headers.From",<br />
+to: "$headers.To"<br />
+}<br />
+},<br />
+{<br />
+$unwind: "$to"<br />
+},<br />
+{<br />
+$group : { _id : { _id: "$_id", from: "$from", to: "$to" }<br />
+}<br />
+},<br />
+{<br />
+$group : { _id : { from: "$_id.from", to: "$_id.to" }, count: {$sum :1}<br />
+}<br />
+},<br />
+{<br />
+$sort : {count:-1}<br />
+},<br />
+{<br />
+$limit: 2<br />
+}<br />
+])<br />
+This would give you the top 2 communication , and check the top most &nbsp;which would turn out to be :</p>
+<p>&nbsp;"result" : [<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"_id" : {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"from" : "susan.mara@enron.com",<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"to" : "jeff.dasovich@enron.com"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;},<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"count" : 750<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;},<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"_id" : {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"from" : "soblander@carrfut.com",<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"to" : "soblander@carrfut.com"<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;},<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;"count" : 679<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br />
+&nbsp;],</p>
+<p>&nbsp;"ok" : 1<br />
+So, it clearly shows the answer is&nbsp;"susan.mara@enron.com" to&nbsp;"jeff.dasovich@enron.com"</p>
+<p><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7121024062452200" data-ad-slot="5555787179"></ins></p>
+<p>(adsbygoogle = window.adsbygoogle || []).push({});</p>
+<p><b>Question 3:</b><br />
+In this problem you will update a document in the Enron dataset to illustrate your mastery of updating documents from the shell.&nbsp;Please add the email address "mrpotatohead@10gen.com" to the list of addresses in the "headers.To" array for the document with "headers.Message-ID" of "&lt;8147308.1075851042335.JavaMail.evans@thyme&gt;"&nbsp;</p>
+<p>For this there would be a simple update expression using mongo shell as :<br />
+db.messages.update({"headers.Message-ID":"&lt;8147308.1075851042335.JavaMail.evans@thyme&gt;"},{$addToSet:{"headers.To":"mrpotatohead@10gen.com"}})</p>
+<p>Then run the validation code and get the validation code as :&nbsp;<b>897h6723ghf25gd87gh28</b></p>
+<p><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7121024062452200" data-ad-slot="5555787179"></ins></p>
+<p>(adsbygoogle = window.adsbygoogle || []).push({});</p>
+<p><b>Question 4:</b><br />
+Enhancing the Blog to support viewers liking certain comments.</p>
+<p>Here you need to work on the BlogPostDAO.java at the area marked as XXXXXX</p>
+<p><b><i>postsCollection.update(new BasicDBObject("permalink", permalink), new BasicDBObject("$inc", new BasicDBObject("comments." + ordinal + ".num_likes", 1)));</i></b><br />
+<b><i><br /></i></b><br />
+Here in the above command we search the posts collection with the permanent link and increment the like counter by one for the comment which is clicked for like or in other words the ordinal or the order of the comment in the comments array, this ensures that the like is incremented for the comment clicked for like.<br />
+Doing this you could see that the like button starts working.</p>
+<p>Now run the validator , and you will get the code as :<b style="font-style: italic;">&nbsp;983nf93ncafjn20fn10f</b></p>
+<p></p>
+<p><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7121024062452200" data-ad-slot="5555787179"></ins></p>
+<p>(adsbygoogle = window.adsbygoogle || []).push({});</p>
+<p><b>Question 5 : &nbsp;</b> &nbsp;</p>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://3.bp.blogspot.com/-az_E75Azw9E/Ujx9vRykkPI/AAAAAAAAAMA/IDGYB9TMswk/s1600/Untitled.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="640" src="assets/Untitled1.png" width="368" /></a></div>
+<p>In this question a set of indexes are given and we have to select the indexes which might have been used , in execution of&nbsp;</p>
+<pre style="background-color: #f8f8f8; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; border-top-left-radius: 3px; border-top-right-radius: 3px; border: 1px solid rgb(204, 204, 204); color: #615f5e; font-family: monospace, serif; line-height: 1.4; overflow: auto; padding: 6px 10px; white-space: pre-wrap; word-wrap: break-word;">db.fubar.find({'a':{'$lt':10000}, 'b':{'$gt': 5000}}, {'a':1, 'c':1}).sort({'c':-1})</pre>
+<p><b><br /></b><br />
+&nbsp;As the Find portion searches on a,b and a,c &nbsp;and sorting is carries on c reverse order.<br />
+<b><br /></b><br />
+<b style="color: #615f5e; font-family: 'PT Sans', Helvetica, Arial, sans-serif; line-height: 22px;">_id_ --</b> This index is not used either in sort or find clause of the operation<br />
+<b>a_1_b_1 -- </b>&nbsp;This index is used in the find operation as find is on a,b<br />
+<b>a_1_c_1 -- &nbsp;</b>This index is used in the find operation as find is on a,c<br />
+<b>c_1 -- </b>This index is also used, because there is a provision that a index is not utilized for the find operation but &nbsp;for the sort it is used as sort({'c':-1})<br />
+<b>a_1_b_1_c_1 - </b>This involves all the three a,b,c and this is also used as it can also be used as a valid index<br />
+<b><br /></b></p>
+<p><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7121024062452200" data-ad-slot="5555787179"></ins></p>
+<p>(adsbygoogle = window.adsbygoogle || []).push({});</p>
+<p><b>Question 6</b><br />
+Suppose you have a collection of students of the following form:</p>
+<pre style="background-color: #f8f8f8; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; border-top-left-radius: 3px; border-top-right-radius: 3px; border: 1px solid rgb(204, 204, 204); color: #615f5e; font-family: monospace, serif; font-size: 0.9em; line-height: 1.4; overflow: auto; padding: 6px 10px; white-space: pre-wrap; word-wrap: break-word;">{
+ "_id" : ObjectId("50c598f582094fb5f92efb96"),
+ "first_name" : "John",
+ "last_name" : "Doe",
+ "date_of_admission" : ISODate("2010-02-21T05:00:00Z"),
+ "residence_hall" : "Fairweather",
+ "has_car" : true,
+ "student_id" : "2348023902",
+ "current_classes" : [
+  "His343",
+  "Math234",
+  "Phy123",
+  "Art232"
+ ]
+}
+
+</pre>
+<p>Now suppose that basic inserts into the collection, which only include the last name, first name and student_id, are too slow. What could potentially improve the speed of inserts. Check all that apply.</p>
+<p>Add an index on last_name, first_name if one does not already exist.<br />
+Set w=0, j=0 on writes<br />
+Remove all indexes from the collection<br />
+Provide a hint to MongoDB that it should not use an index for the inserts<br />
+Build a replica set and insert data into the secondary nodes to free up the primary nodes.<br />
+<b><br /></b><br />
+<b>option 1 - </b>As a fact adding index affects reading not writing so it would be indifferent with the indexing so not this option<br />
+<b>Option 2 </b>seems to be valid as when w=0 and j=0 is done for the writes no waiting is done at all are no wait is required to obtain as the write confirmations , simply the data is dumped without verification therefore speeding the writes<br />
+<b>Option 3 </b>removing indexes would actually help as it would reduce the load and speed up the writing process<br />
+<b>Option 4 </b>This seems absurd<br />
+<b>Option 5 </b>This is not actually possible as writes are not possible on the secondary nodes so not valid option<br />
+<b><br /></b><br />
+<b><br /></b></p>
+<p><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7121024062452200" data-ad-slot="5555787179"></ins></p>
+<p>(adsbygoogle = window.adsbygoogle || []).push({});</p>
+<p><b>Question 7</b><br />
+You have been tasked to cleanup a photosharing database. The database consists of two collections, albums, and images. Every image is supposed to be in an album, but there are orphan images that appear in no album. Here are some example documents (not from the collections you will be downloading).&nbsp;</p>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-T2JOC95pbAc/Ujx0jvmOKUI/AAAAAAAAALw/DaTxMYa6fc4/s1600/Untitled.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="371" src="assets/Untitled2.png" width="400" /></a></div>
+<p>When you are done removing the orphan images from the collection, there should be 90,017 documents in the images collection.&nbsp;</p>
+<p>In order to remove the Orphans talked I wrote a Java Program :</p>
+<p><i>/**</i><br />
+<i>&nbsp;*</i><br />
+<i>&nbsp;* @author Ankur Gupta</i><br />
+<i>&nbsp;*/</i><br />
+<i>public class Test {</i><br />
+<i>&nbsp; &nbsp;&nbsp;</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; public static void main(String[] args) throws IOException {</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MongoClient c = &nbsp;new MongoClient(new MongoClientURI("mongodb://localhost"));</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DB db = c.getDB("finaltask");</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; int i =0;</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DBCollection album = db.getCollection("albums");</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DBCollection image = db.getCollection("images");</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DBCursor cur = image.find();</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; cur.next();</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; while (cur.hasNext()){</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Object id = cur.curr().get("_id");</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DBCursor curalbum = album.find(new BasicDBObject("images", id));</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if(!curalbum.hasNext()){</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;image.remove(new BasicDBObject("_id", id));</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cur.next();</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</i><br />
+<i>&nbsp; &nbsp; &nbsp; &nbsp; }</i><br />
+<i>}</i><br />
+<i><br /></i><br />
+In order to verify above statement after removing orphans :<br />
+<i>db.albums.aggregate({$unwind:"$images"},{$group:{_id:null,sum:{$sum:"$images"},count:{$sum:1}}})</i><br />
+The result looks like:<br />
+&nbsp; &nbsp; "result" : [<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "_id" : null,<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sum" : NumberLong("4501039268"),<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "count" : 90017<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp; &nbsp; ],<br />
+&nbsp; &nbsp; "ok" : 1<br />
+<i><br /></i><br />
+To prove you did it correctly, what are the total number of images with the tag 'sunrises" after the removal of orphans?<br />
+db.images.find({"tags":"sunrises"}).count()<br />
+This will fetch the final answer as &nbsp;<b>45044</b></p>
+<p></p>
+<p><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7121024062452200" data-ad-slot="5555787179"></ins></p>
+<p>(adsbygoogle = window.adsbygoogle || []).push({});</p>
+<p><b>Question 8:</b><br />
+Supposed we executed the following Java code. How many animals will be inserted into the "animals" collection?</p>
+<pre style="background-color: #f8f8f8; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; border-top-left-radius: 3px; border-top-right-radius: 3px; border: 1px solid rgb(204, 204, 204); color: #615f5e; font-family: monospace, serif; font-size: 0.9em; line-height: 1.4; overflow: auto; padding: 6px 10px; white-space: pre-wrap; word-wrap: break-word;">public class Question8 {
+
+
+
+        public static void main(String[] args) throws IOException {
+            MongoClient c =  new MongoClient(new MongoClientURI("mongodb://localhost"));
+            DB db = c.getDB("test");
+            DBCollection animals = db.getCollection("animals");
+
+
+            BasicDBObject animal = new BasicDBObject("animal", "monkey");
+
+            animals.insert(animal);
+            animal.removeField("animal");
+            animal.append("animal", "cat");
+            animals.insert(animal);
+            animal.removeField("animal");
+            animal.append("animal", "lion");
+            animals.insert(animal);
+
+        }
+
+}
+</pre>
+<div>
+</div>
+<p>When you run the above , then you will see an error is thrown that there is a duplicate ID , as we are trying to add , documents again and again on the same Id as we are modifying the same document . So the only one document will be inserted in the collection which will be the first insert as {_id::xxx,"animal","monkey"}<br />
+then when again ("animal","cat") is tried to push then the id is same so , it throws duplicate key . So answer is that only one document gets inserted.</p>
+<p></p>
+<p><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7121024062452200" data-ad-slot="5555787179"></ins></p>
+<p>(adsbygoogle = window.adsbygoogle || []).push({});</p>
+<p><b>Question 9:</b><br />
+Imagine an electronic medical record database designed to hold the medical records of every individual in the United States. Because each person has more than 16MB of medical history and records, it's not feasible to have a single document for every patient. Instead, there is a&nbsp;<i style="background-color: white; color: #615f5e; font-family: 'PT Sans', Helvetica, Arial, sans-serif; line-height: 22px;">patient</i>collection that contains basic information on each person and maps the person to a patient_id, and a<i style="background-color: white; color: #615f5e; font-family: 'PT Sans', Helvetica, Arial, sans-serif; line-height: 22px;">record</i>&nbsp;collection that contains one document for each test or procedure. One patient may have dozens or even hundreds of documents in the&nbsp;<i style="background-color: white; color: #615f5e; font-family: 'PT Sans', Helvetica, Arial, sans-serif; line-height: 22px;">record</i>&nbsp;collection.&nbsp;<br />
+<br style="background-color: white; color: #615f5e; font-family: 'PT Sans', Helvetica, Arial, sans-serif; line-height: 22px;" /><br />
+We need to decide on a shard key to shard the&nbsp;<i style="background-color: white; color: #615f5e; font-family: 'PT Sans', Helvetica, Arial, sans-serif; line-height: 22px;">record</i>&nbsp;collection. What's the best shard key for the<i style="background-color: white; color: #615f5e; font-family: 'PT Sans', Helvetica, Arial, sans-serif; line-height: 22px;">record</i>&nbsp;collection, provided that we are willing to run scatter gather operations to do research and run studies on various diseases and cohorts? That is, think mostly about the operational aspects of such a system.</p>
+<p>patient_id<br />
+_id<br />
+primary care physican (your principal doctor)<br />
+date and time when medical record was created<br />
+patient first name<br />
+patient last name</p>
+<p>Here among the options given for the shard key most favourable is patient_id , as there are large number of patient_id and they have been distributed in different diseases, and when a scatter gather operation is carried out then the data is far more expanded on the basis of patient_id.</p>
+<p>Other options are not suitable for the scatter and gather operation.</p>
+<p></p>
+<p><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-7121024062452200" data-ad-slot="5555787179"></ins></p>
+<p>(adsbygoogle = window.adsbygoogle || []).push({});</p>
+<p><b>Question 10:</b><br />
+<b style="background-color: white; color: #615f5e; font-family: 'PT Sans', Helvetica, Arial, sans-serif; line-height: 22px;">Understanding the output of explain</b>&nbsp;We perform the following query on the enron dataset:</p>
+<pre style="background-color: #f8f8f8; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; border-top-left-radius: 3px; border-top-right-radius: 3px; border: 1px solid rgb(204, 204, 204); color: #615f5e; font-family: monospace, serif; font-size: 0.9em; line-height: 1.4; overflow: auto; padding: 6px 10px; white-space: pre-wrap; word-wrap: break-word;">db.messages.find({'headers.Date':{'$gt': new Date(2001,3,1)}},{'headers.From':1, _id:0}).sort({'headers.From':1}).explain()
+</pre>
+<p>and get the following explain output.</p>
+<pre style="background-color: #f8f8f8; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; border-top-left-radius: 3px; border-top-right-radius: 3px; border: 1px solid rgb(204, 204, 204); overflow: auto; padding: 6px 10px; word-wrap: break-word;">{
+ "cursor" : "BtreeCursor headers.From_1",
+ "isMultiKey" : false,
+ "n" : 83057,
+ "nscannedObjects" : 120477,
+ "nscanned" : 120477,
+ "nscannedObjectsAllPlans" : 120581,
+ "nscannedAllPlans" : 120581,
+ "scanAndOrder" : false,
+ "indexOnly" : false,
+ "nYields" : 0,
+ "nChunkSkips" : 0,
+ "millis" : 250,
+ "indexBounds" : {
+  "headers.From" : [
+   [
+    {
+     "$minElement" : 1
+    },
+    {
+     "$maxElement" : 1
+    }
+   ]
+  ]
+ },
+ "server" : "Andrews-iMac.local:27017"
+}
+</pre>
+<div>
+<div>
+The query did not utilize an index to figure out which documents match the find criteria.</div>
+<div>
+The query used an index for the sorting phase.</div>
+<div>
+The query returned 120,477 documents</div>
+<div>
+The query performed a full collection scan</div>
+</div>
+<p>
+Here the correct options will be :<br />
+Option 1 seems to be correct as &nbsp;if you could notice that&nbsp;"cursor" : "BtreeCursor headers.From_1" that means that headers.From_1 is used which is not in the find clause but is in the sorting</p>
+<p>Option 2 also seems to be correct as "cursor" : "BtreeCursor headers.From_1" the cursor is used in the sorting phase</p>
+<p>Option 3 This option is wrong as 83057 records as n=83057</p>
+<p>Option 4 This option is correct as if we see nscanned objects is 120477 so it has scanned all </p>
+<p>Hope that above explanation prove helpful, please put your precious comments and suggestions on better method to do any question.</p></div>
+<p><ins class="adsbygoogle" style="display:inline-block;width:120px;height:600px" data-ad-client="ca-pub-7121024062452200" data-ad-slot="4079053977"></ins></p>
+<p>(adsbygoogle = window.adsbygoogle || []).push({});</p>

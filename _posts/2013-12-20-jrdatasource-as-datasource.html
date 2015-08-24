@@ -1,0 +1,274 @@
+---
+layout: post
+title: How to set datasource in iReport using a JRDatasource Provider as well as custom
+  JRDataSource - Along with sample and Video Tutorial
+date: 2013-12-20 13:27:00.000000000 +05:30
+categories: []
+tags:
+- iReport
+- Jasper-Java Integration
+- jaspersoft
+- java
+- JRdatasource
+- technical
+- tutorial
+- video
+- walkthrough
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '4815802624045929497'
+  blogger_author: g116451164261752827176
+  blogger_comments: '2'
+  blogger_permalink: /2013/12/jrdatasource-as-datasource.html
+  blogger_thumbnail: http://1.bp.blogspot.com/-_CrpW-qhyUQ/UrQ_j22EymI/AAAAAAAAAZI/GysfhI7vsg8/s400/Untitled.png
+  _thumbnail_id: '69'
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+JRDataSource is   interface that  represents the abstract representation of a JasperReports data source. All data source types must implement this interface. </p>
+<div>
+</div>
+<div>
+We could create &nbsp; JRDatasource using java code, but there is a stipulation that the class made as the datasource needs to implement JRDataSource interface.</div>
+<div>
+</div>
+<div>
+Now, in this article I will talk about:</div>
+<div>
+1. Setting the datasource using custom JRDataSource.</div>
+<div>
+2. Setting the datasource using JRDataSourceProvider.</div>
+<div>
+</div>
+<div>
+To start with,&nbsp;</div>
+<div>
+<b>Setting the datasource using custom JRDataSource.</b></div>
+<div>
+The prerequisites for the creating a custom datasource are:</div>
+<div>
+1. JRDataSource</div>
+<div>
+2. Factory class setting the JRDataSource.</div>
+<div>
+</div>
+<div>
+</div>
+<div>
+</div>
+<div>
+<b>Setting the datasource using JRDataSourceProvider</b></div>
+<div>
+<div>
+The prerequisites for the creating a custom datasource are:</div>
+<div>
+1. JRDataSource</div>
+</div>
+<div>
+2. JRDataSourceProvider implemented class.</div>
+<div>
+</div>
+<div>
+</div>
+<div>
+For showing setting of each of the methods I have created a youtube video.<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="http://youtu.be/aCBRMm5_vbQ" target="_blank">==VIDEO LINK==</a></p>
+<p>In the sample I have created, what I intend to do is that I want to know the names, is directory(boolean true/false) and the size on disk, of the folder whose path is passed in the constructor of the datasource. Now in my datasource I have 3 columns <b>NAME</b>, <b>SIZE</b> and <b>IS_DIRECTORY.</b></div>
+<div>
+</div>
+<div>
+In both the cases we need to create a JRDatasource class .. that is the class which implements JRDataSource, so in the sample it looks like this&nbsp;</div>
+<div>
+</div>
+<div>
+<blockquote style="background-color: lavender; width: 400px;"><p>
+/** <br />
+* JR DataSource Class<br />
+* @author Ankur Gupta<br />
+*/<br />
+public class JRFileSystemDataSource  implements JRDataSource {<br />
+File[] files = null;<br />
+int index = -1;<br />
+public JRFileSystemDataSource(String path) {<br />
+File dir = new File(path);<br />
+if (dir.exists() &amp;&amp; dir.isDirectory()) {<br />
+files = dir.listFiles();<br />
+}<br />
+}</p>
+<p>@Override<br />
+public boolean next() throws JRException {<br />
+index++;<br />
+if (files != null &amp;&amp; index &lt; files.length) {<br />
+return true;<br />
+}<br />
+return false;<br />
+}</p>
+<p>@Override<br />
+public Object getFieldValue(JRField jrf) throws JRException {<br />
+File f = files[index];<br />
+if (f == null) {<br />
+return null;<br />
+}<br />
+if (jrf.getName().equals("name")) {<br />
+return f.getName();<br />
+} else if (jrf.getName().equals("IS_DIRECTORY")) {<br />
+return new Boolean(f.isDirectory());<br />
+} else if (jrf.getName().equals("totalSpace")) {<br />
+return new Long(f.length());<br />
+}<br />
+// Field not found...<br />
+return null;<br />
+}</p>
+<p>/**<br />
+* This method is responsible for setting the field names in the provider.(Required for the provider)<br />
+* @return <br />
+*/<br />
+public static String[] fieldNames() { <br />
+String[]  fieldNames = {"name", "IS_DIRECTORY", "totalSpace"}; <br />
+return fieldNames; <br />
+} <br />
+}<br />
+<i>CODE SCRIPTLET #1</i></p></blockquote>
+<p>The&nbsp;<b><i> fieldNames()</i></b>&nbsp; method is not required for custom JRDataSource , but is required for JRDataSource Provider.</p>
+<p><b>Now for the custom JRDatasource</b><br />
+1. The JRDataSource as shown above.(Remove the last method not required.)<br />
+2. The Factory Class for the custom JRDataSource looks like.</p>
+<blockquote style="background-color: lavender; width: 400px;"><p>
+/** <br />
+*<br />
+* @author Ankur Gupta<br />
+*/<br />
+public class FactoryClassDataSource {</p>
+<p>/**<br />
+* Factory Class responsible for setting the JRdatasource.<br />
+* @return <br />
+*/<br />
+public static JRDataSource generateDS(){<br />
+return new JRFileSystemDataSource("Path of the desired folder");<br />
+}<br />
+} <br />
+<i>CODE SCRIPTLET #2</i></p></blockquote>
+<p>
+This is it, now you can compile these two classes , and place the jar file in the class path.</p>
+<p><b>Now for the &nbsp;JRDatasource Provider.</b><br />
+1. The JRDataSource as shown as above in the code scriptet #1.<br />
+2. Next is the JRDataSourceProvider class shown as below.</p>
+<p></p>
+<blockquote style="background-color: lavender; width: 400px;"><p>
+/** <br />
+* JRDatasource Provider<br />
+* @author Ankur Gupta<br />
+*/<br />
+public class JRFileSystemDataSourceProvider implements JRDataSourceProvider{</p>
+<p>@Override<br />
+public boolean supportsGetFieldsOperation() {<br />
+return false;<br />
+}</p>
+<p>@Override<br />
+public JRField[] getFields(JasperReport jr) throws JRException, UnsupportedOperationException {</p>
+<p>ArrayList fields = new ArrayList();<br />
+String [] fieldNames = JRFileSystemDataSource.fieldNames();<br />
+for (String s : fieldNames) {<br />
+JRDesignField field = new JRDesignField();<br />
+field.setName(s);<br />
+field.setValueClassName("java.lang.String");<br />
+fields.add(field);<br />
+}<br />
+return (JRField[]) fields.toArray(new JRField[fields.size()]);<br />
+}</p>
+<p>@Override<br />
+public JRDataSource create(JasperReport jr) throws JRException {<br />
+return new JRFileSystemDataSource("Enter the path of folder");<br />
+}</p>
+<p>@Override<br />
+public void dispose(JRDataSource jrds) throws JRException {<br />
+}</p>
+<p>}<br />
+<i>CODE SCRIPTLET #3</i></p></blockquote>
+<p>
+Now, you can compile the classes and get the jar and place it in the classpath of iReport.</p>
+<p>This was the portion you need to complete in creating the JAR file, now we need to set the datasource in thr iReport .<br />
+<b>For setting the datasource as custom JRDataSource</b>, you need to enter the qualified path of the factory class. In iReport it looks like :</p>
+<p>&nbsp; </p>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;">
+<tbody>
+<tr>
+<td style="text-align: center;"><a href="http://1.bp.blogspot.com/-_CrpW-qhyUQ/UrQ_j22EymI/AAAAAAAAAZI/GysfhI7vsg8/s1600/Untitled.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="400" src="assets/Untitled.png" width="340" /></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align: center;">Custom JRDataSource</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Now you need to create the fields in the iReport by doing a right click on the field node and remember that the name of the field should be same as in the datasource . In the sample we need to create 3 fields as &nbsp;name, IS_DIRECRTORY,totalSpace.&nbsp;</p></div>
+<div>
+And then place these fields in the detail section of the report and then preview the report and then you could see the contents of the folder(In the sample the folder path is set to C drive.)</div>
+<div>
+</div>
+<div>
+<b>For setting the datasource as JRDataSourceProvider</b>, you need to set datasource by selecting to create a new datasource of type JRDataSourceProvider. In the sample it looks like</div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;">
+<tbody>
+<tr>
+<td style="text-align: center;"><a href="http://3.bp.blogspot.com/-DIR1zeXXhK0/UrRBRAbCt-I/AAAAAAAAAZU/kiMn3vpRjkA/s1600/Untitled.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="400" src="assets/Untitled1.png" width="340" /></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align: center;">JRDataSourceProvider</td>
+</tr>
+</tbody>
+</table>
+<p>
+Now the difference in the custom JRDataSource and JRDataSource Provider is that in this function you will not be worried for creating the field &nbsp;you could directly fetch it by going to the <b>Report query, </b>navigate to <b>DataSource Provider tab</b> and click on<b> Get Fields from dataSource , </b>it will display all the fields in case of this sample it look like :</p>
+<div>
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-sx-NIOT8tYI/UrRCu8K7XJI/AAAAAAAAAZg/ZqQzkb34ms4/s1600/Untitled.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="240" src="assets/Untitled2.png" width="400" /></a></div>
+<div>
+<div>
+You then use the fields in the report and you can obtain similar structure of folder.</div>
+</div>
+<div>
+</div>
+<div>
+</div>
+<div>
+Here is the sample ZIP file&nbsp;</div>
+<div>
+</div>
+<div>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="https://drive.google.com/file/d/0B4yFyF_EORB_NnFkZHNfNVhlY0E/edit?usp=sharing" target="_blank">==ZIP FILE==</a></div>
+<div>
+This ZIP &nbsp;file will contain</div>
+<div>
+1, TestRun PDF</div>
+<div>
+2. JRXMLs for both the custonm JRDataSource as well &nbsp;as JRDataSource Provider</div>
+<div>
+3, JAR file which is needed to be placed in the classpath of iReport.</div>
+<div>
+</div>
+<div>
+You could follow the video and sample and learn how to set the datasource with JRDataSource easily.</div>
+<div>
+</div>
+<div>
+Please put you questions or demands for clarification in the comments section below.</div>
+<div>
+</div>
+<div>
+Happy Coding.,,,!!!</div>
+<div>
+</div>
+</div>

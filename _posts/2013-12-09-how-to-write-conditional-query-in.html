@@ -1,0 +1,101 @@
+---
+layout: post
+title: How to write conditional query in iReport using parameters
+date: 2013-12-09 14:37:00.000000000 +05:30
+categories: []
+tags:
+- dynamic SQL implementation
+- iReport
+- jaspersoft
+- technical
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '6392307606404900173'
+  blogger_author: g116451164261752827176
+  blogger_comments: '45'
+  blogger_permalink: /2013/12/how-to-write-conditional-query-in.html
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Inside iReport creating static query that is, writing a simple static query in the the Query executor and set it up running is quite simple and too monotonous.</p>
+<p>The real challenge arrives in actually changing the query of the report dynamically based upon some condition, this could be achieved with a simple implementation of parameters.</p>
+<p>Following are the steps to use the conditional SQL Statements.</p>
+<p>1. Create a parameter if you want user triggered change of the SQL Query , if not user triggered then it must be based upon the field, so that can be used too.</p>
+<p>2. Create a different parameter which will be responsible for triggering the changed query based upon the condition.</p>
+<p>3. Now identify the condition which is responsible for changing the query,</p>
+<p>4. The parameter which contains the conditional SQL switching should have the property "Used as prompt" turned off and the condition should be placed in the default value.</p>
+<p>5. Then after setting this, move onto set the Report Query Expression. Now see the dynamism of the query could be provided to the whole query or a portion of query so accordingly place the expression .The parameter containing the conditional expression should be used as the expression and it should be denoted as <b>$P!{name of the param containing expression}</b></p>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Here is a little illustration</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Suppose there is a parameter called $P{TestParamSQL}, the prompt should be turned off as we are setting the value at runtime checking the value of the&nbsp;<em>$P{TEST_PARAM}.&nbsp;</em></div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Set the default value of the parameter as:</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+For a single condition&nbsp;</div>
+<div class="geshifilter" style="background-color: #f8f8f8; border: 1px solid rgb(204, 204, 204); color: #222222; font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 1.3; margin: 0.5em; overflow: auto; padding: 0.5em;">
+<div class="java geshifilter-java" style="font-family: monospace; margin: 0px; padding: 0px;">
+<pre style="font-size: 12px; line-height: 1.3; overflow: hidden; padding: 0px; white-space: pre-wrap; word-wrap: break-word;">$P{TEST_PARAM}.equals("test")
+? " select SQL query"
+: " else SQL select query"</pre>
+</div>
+</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+For a multiple condition&nbsp;</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+</div>
+<div class="geshifilter" style="background-color: #f8f8f8; border: 1px solid rgb(204, 204, 204); color: #222222; font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 1.3; margin: 0.5em; overflow: auto; padding: 0.5em;">
+<div class="java geshifilter-java" style="font-family: monospace; margin: 0px; padding: 0px;">
+<pre style="font-size: 12px; line-height: 1.3; overflow: hidden; padding: 0px; white-space: pre-wrap; word-wrap: break-word;">$P{TEST_PARAM}.equals("test")
+? " select SQL query"
+: $P{TEST_PARAM}.equals("test1")
+? " SQL select query"
+: $P{TEST_PARAM}.equals("test2")
+?" SQL Query"
+: "else SQL Query"</pre>
+</div>
+</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+<em>Now in the iReport Query executor you should give the following expression</em><strong>$P!{TestParamSQL}</strong>&nbsp;</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+<b>Do take care that the dependent parameter&nbsp;$P{TEST_PARAM}. should be set before the&nbsp;$P{TestParamSQL} else would throw a null pointer exception.</b></div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+<b>Another thing which should be kept in mind is that the query given in the quotes in the expression should be syntactically correct, that is the SQL in as the string should be correct.</b></div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+<b><br /></b></div>
+<div style="background-color: #fefdfa; color: #333333; font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Here is a running sample-</p>
+<p>Prerequesites-<br />
+1.&nbsp;<a href="https://drive.google.com/file/d/0B4yFyF_EORB_eW1kOEFxUTRJSEE/edit?usp=sharing" style="color: #7d181e; text-decoration: none;" target="_blank">JRXML File</a><br />
+2.&nbsp;<a href="https://drive.google.com/file/d/0B4yFyF_EORB_eW1kOEFxUTRJSEE/edit?usp=sharing" style="color: #7d181e; text-decoration: none;" target="_blank">PDF Export</a></p>
+<p>Steps to set up this Sample Report.</p>
+<div style="color: black; margin: 1em 0px; padding: 0px;">
+1. Then you must choose&nbsp;<b>Sample Database</b>&nbsp;in the datasource</div>
+<div style="color: black; margin: 1em 0px; padding: 0px;">
+4. Then next you need to activate the the sample database from&nbsp;<b>Help</b>(in the iReport Menu bar)---&gt;&nbsp;<b>Samples</b>----&gt;<b>Run Sample Database</b></div>
+<div style="color: black; margin: 1em 0px; padding: 0px;">
+5. Then Run the &nbsp;Report</div>
+<div style="color: black; margin: 1em 0px; padding: 0px;">
+</div>
+<p>There is a PDF export also which would show exactly how the report looks(The input value is employeeId= 2).</p>
+<p>Please put in you queries/suggestions, I will be more than happy to know.</p></div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+</div>
+<div style="background-color: #fefdfa; color: #333333; font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Cheers .. Happy Coding!!</div>
+</div>

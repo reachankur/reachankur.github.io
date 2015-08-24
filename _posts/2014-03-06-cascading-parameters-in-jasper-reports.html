@@ -1,0 +1,74 @@
+---
+layout: post
+title: Cascading Parameters in Jasper Reports
+date: 2014-03-06 06:25:00.000000000 +05:30
+categories: []
+tags:
+- iReport
+- jaspersoft
+- tutorial
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '289915630586136646'
+  blogger_author: g116451164261752827176
+  blogger_comments: '8'
+  blogger_permalink: /2014/03/cascading-parameters-in-jasper-reports.html
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Cascading, what does one mean by saying cascading, literally it means  anything   that   resembles   a   waterfall or  especially seeming to flow. Now where to implement this in Jasper Reports? &nbsp; &nbsp;</p>
+<div>
+</div>
+<div>
+Right, it could be used in parameters, or rather the filters which are dependent on each other. You can find these kind of filters in online shopping websites, wherein we can choose on various filters like if we want to buy the laptop first filter would be Laptop next filter would be the company chosen among the companies which sell Laptops, and then we chose for the specifications like processor,ram etc. each have separate filters but the boundaries of the parameter depends on the previous parameter.</p>
+<div style="text-align: left;">
+</div>
+<div style="text-align: left;">
+Before getting into the setup of Cascading Parameters in Jasper Report there are few things which we need to know before hand -&nbsp;</div>
+<div style="text-align: left;">
+Usage of &nbsp; <b>&nbsp; $X{IN, feild, parameter}</b> in the SQL Query used in the Where clause, which filters the data based on the selection. Let me go one by one in explaining the components</div>
+<div style="text-align: left;">
+<b>field </b>- Now this is the field in the database upon which the find will be done</div>
+<div style="text-align: left;">
+<b>parameter </b>- Now this is the parameter selected by user and will be queried or looked in the field. This enable for multi select also in the parameters.</div>
+<div style="text-align: left;">
+</div>
+<div style="text-align: left;">
+Now in &nbsp;order to achieve this in Jasper Reports we need to follow few steps.</div>
+<div style="text-align: left;">
+</div>
+<p></p>
+<ol style="text-align: left;">
+<li>First of all you need to design a Jasper Report and identify the parameters to be cascaded</li>
+<li>Then we need to define the expression for parameters, &nbsp;and mind one thing that each of the parameter need to be of type java.util.collection if you want to enable multi- select.</li>
+<li>Next and very important thing is that the cascading parameters could not be tested in iReport / JasperSoft Studio, this &nbsp;needs to be deployed on Jasper Server in order to check the correct functionality. Though could be run in iReport or JasperReports with default values hardcoded.</li>
+</ol>
+<p>
+I have created a working sample which could be simply deployed, and checked for the functionality and working.<br />
+The Zip file could be downloaded from here &nbsp;- <a href="https://drive.google.com/file/d/0B4yFyF_EORB_VlZULThDN3V2MVk/edit?usp=sharing" target="_blank">LINK TO ZIP FILE</a></p>
+<p>The Zip file contains<br />
+1. Cascade Parameter Report (JRXML File)<br />
+2. SQL DUMP, could be extracted using MySQL or any other tool<br />
+3. Table Creation Script in a notepad file, this will allow you to create the require table in the database.</p>
+<p>For setting up the sample report you need to-<br />
+1. Create a schema in you database and create the table using the script command<br />
+2. Then run the JRXML file using iReport/Jaspersoft Studio<br />
+3. Then set the datasource referring to Persons table in the database.<br />
+4. Then deploy the JRXML &nbsp;on the Jasper Server, and set the datasource and input controls. Do remember the names of the parameters used in the report should exactly match the input controls declared on the Jasper Server.</p>
+<p>If you miss on some step then you could follow a YouTube video of mine which &nbsp;will serve as a tutorial.<br />
+Below is the video where in you could see all the steps.</p>
+<p>
+<iframe allowfullscreen="" frameborder="0" height="270" src="//www.youtube.com/embed/N7pBJktoSt8" width="480"></iframe></p>
+<p>Please put your views or questions or suggestions below, I will be more than happy to hear them.Happy Coding!!</p></div>
+</div>

@@ -1,0 +1,315 @@
+---
+layout: post
+title: All you want to know about Scriptlets!!
+date: 2014-01-17 13:55:00.000000000 +05:30
+categories: []
+tags:
+- iReport
+- Jasper-Java Integration
+- jaspersoft
+- JasperSoft Studio
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '4848504822695951045'
+  blogger_author: g116451164261752827176
+  blogger_comments: '2'
+  blogger_permalink: /2014/01/all-you-want-to-know-about-scriptlets.html
+  blogger_thumbnail: http://4.bp.blogspot.com/-wFFhQWmYIMc/Us_69LMP4XI/AAAAAAAAAhM/PMzqd7DSRvw/s1600/Figure1-JasperSoft+Studio.png
+  _thumbnail_id: '66'
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div class="MsoNormal">
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://reportlingo.com/wp-content/uploads/2014/01/Figure1-JasperSoft-Studio1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><br /></a></div>
+<p>First question which comes to mind after coming across this<br />
+word Scriptlet is that does it have any relationships with scripts, if yes then<br />
+what scripts, the answer&nbsp; to this<br />
+question is No it does not have any relation with scripts.&nbsp;&nbsp;&nbsp; Scriptlets basically act as an interface<br />
+between the Jasper Reports and Java. It provides much of flexibility to the<br />
+reporting as now we can introduce user defined functions.</p></div>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+Scriptlet is nothing but a java class which is extended with<br />
+either <br />
+<b>1</b>. <b>net.sf.jasperreports.engine. JRAbstractScriptlet<br />
+<br />
+2. net.sf.jasperreports.engine.JRDefaultScriptlet. </p>
+<p></b>Now we need to identify which class we need to<br />
+extend based upon the usage<b>, JRAbstractSriptlet c</b>ontains a<br />
+number of abstract methods that must be overridden in every implementation, developer<br />
+must implement all the abstract methods whereas <b>JRDefaultScriptlet</b> contains default empty implementations of every<br />
+method in JRAbstractScriptlet, a developer is only required to implement those<br />
+methods he/she needs for their project.</div>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+Now following listed are the methods that will be called by<br />
+the report engine at the appropriate time, during report filling phase.</div>
+<div class="MsoNormal">
+</div>
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="background: #F7F7F7; border-collapse: collapse; border: none; margin-left: 59.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-padding-alt: 0in 0in 0in 0in; mso-yfti-tbllook: 1184; width: 467px;">
+<tbody>
+<tr>
+<td style="border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+public void beforeReportInit()</div>
+</td>
+<td style="border-left: none; border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-border-left-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Called before report initialization.</div>
+</td>
+</tr>
+<tr>
+<td style="border-top: none; border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+public void afterReportInit()</div>
+</td>
+<td style="border-bottom: solid #D6D6D6 1.0pt; border-left: none; border-right: solid #D6D6D6 1.0pt; border-top: none; mso-border-alt: solid #D6D6D6 .5pt; mso-border-left-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Called after report initialization.</div>
+</td>
+</tr>
+<tr>
+<td style="border-top: none; border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+public void beforePageInit()</div>
+</td>
+<td style="border-bottom: solid #D6D6D6 1.0pt; border-left: none; border-right: solid #D6D6D6 1.0pt; border-top: none; mso-border-alt: solid #D6D6D6 .5pt; mso-border-left-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Called before each page is initialized.</div>
+</td>
+</tr>
+<tr>
+<td style="border-top: none; border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+public void afterPageInit()</div>
+</td>
+<td style="border-bottom: solid #D6D6D6 1.0pt; border-left: none; border-right: solid #D6D6D6 1.0pt; border-top: none; mso-border-alt: solid #D6D6D6 .5pt; mso-border-left-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Called after each page is initialized.</div>
+</td>
+</tr>
+<tr>
+<td style="border-top: none; border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+public void beforeColumnInit()</div>
+</td>
+<td style="border-bottom: solid #D6D6D6 1.0pt; border-left: none; border-right: solid #D6D6D6 1.0pt; border-top: none; mso-border-alt: solid #D6D6D6 .5pt; mso-border-left-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Called before each column is initialized.</div>
+</td>
+</tr>
+<tr>
+<td style="border-top: none; border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+public void afterColumnInit()</div>
+</td>
+<td style="border-bottom: solid #D6D6D6 1.0pt; border-left: none; border-right: solid #D6D6D6 1.0pt; border-top: none; mso-border-alt: solid #D6D6D6 .5pt; mso-border-left-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Called after each column is initialized.</div>
+</td>
+</tr>
+<tr>
+<td style="border-top: none; border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+public void beforeGroupInit(String groupName)</div>
+</td>
+<td style="border-bottom: solid #D6D6D6 1.0pt; border-left: none; border-right: solid #D6D6D6 1.0pt; border-top: none; mso-border-alt: solid #D6D6D6 .5pt; mso-border-left-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Called before the group specified in the parameter is<br />
+  initialized.</div>
+</td>
+</tr>
+<tr>
+<td style="border-top: none; border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+public void afterGroupInit(String groupName)</div>
+</td>
+<td style="border-bottom: solid #D6D6D6 1.0pt; border-left: none; border-right: solid #D6D6D6 1.0pt; border-top: none; mso-border-alt: solid #D6D6D6 .5pt; mso-border-left-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Called after the group specified in the parameter is<br />
+  initialized.</div>
+</td>
+</tr>
+<tr>
+<td style="border-top: none; border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+public void beforeDetailEval()</div>
+</td>
+<td style="border-bottom: solid #D6D6D6 1.0pt; border-left: none; border-right: solid #D6D6D6 1.0pt; border-top: none; mso-border-alt: solid #D6D6D6 .5pt; mso-border-left-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Called before each record in the detail section of the<br />
+  report is evaluated.</div>
+</td>
+</tr>
+<tr>
+<td style="border-top: none; border: solid #D6D6D6 1.0pt; mso-border-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+public void afterDetailEval()</div>
+</td>
+<td style="border-bottom: solid #D6D6D6 1.0pt; border-left: none; border-right: solid #D6D6D6 1.0pt; border-top: none; mso-border-alt: solid #D6D6D6 .5pt; mso-border-left-alt: solid #D6D6D6 .5pt; mso-border-top-alt: solid #D6D6D6 .5pt; padding: 3.15pt 3.15pt 3.15pt 3.15pt;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+Called after each record in the detail section of the<br />
+  report is evaluated.</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+Except these we can also use User defined custom functions,<br />
+I have already posted about them in my previous post here is the link- </div>
+<div class="MsoNormal">
+<a href="http://mindfirejavaexperts.wordpress.com/2014/01/10/how-to-add-user-defined-function-in-ireport/">http://ankurthetechie.blogspot.in/2013/12/jasperScriptletIntegration.html</a></div>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+Few important facts which need to be kept in mind using<br />
+scriptlets are-</div>
+<div style="text-indent: 0px;">
+<ol style="text-align: left;">
+<li>When we do a System.out.println in any of the<br />
+function then it does not directly print in the report, many a times people<br />
+have some misconception but to remind System.out.println&nbsp; is a console command and prints the value in<br />
+the Report console, that is called the Report output window.</li>
+<li>&nbsp;These functions are fired when<br />
+the Jasper Print object is created, and it is created when a JRXML runs.</li>
+</ol>
+</div>
+<p></p>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+Now after creating our scriptlet classes and packaging &nbsp;it into a jar file we are ready to use it in<br />
+our Jasper Report created either in iReport or JasperSoft Studio.</div>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+Follow the following&nbsp;<br />
+steps to implement scriptlets in iReport</div>
+<div class="MsoNormal">
+</div>
+<ol style="text-align: left;">
+<li>&nbsp;Add the Scriptlet jar file in the classpath by<br />
+clicking on the Tools(Menu Bar) à<br />
+Options à<br />
+Classpath Tab&nbsp; and add the Jar file here.</li>
+<li>&nbsp;Locate the Report Inspector Window</li>
+<li>&nbsp;There is a node called Scriptlet, expand the<br />
+node and we could see REPORT</li>
+<li>&nbsp;You can create a another scriptlet label by<br />
+right clicking the scriptlet label and then select Add</li>
+<li>Now locate the new element called Scriptlet1<br />
+under the node SCRIPTLET.<b> (Check Fig-1)</b></li>
+<li>&nbsp;Navigate to the properties of the Scriptlet1<br />
+there could be seen Name, Scriptlet Class and Description.</li>
+<li>Now you<br />
+can enter the desired name for the scriptlet.</li>
+<li>&nbsp;Scriptlet Class&nbsp;<br />
+is the fully qualified path of the scriptlet class in the JAR File.</li>
+<li>&nbsp;Description is for the describing the role of<br />
+the scriptlet <b>( Check Fig-2)<br /> </b></li>
+</ol>
+<div class="MsoNormal">
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://reportlingo.com/wp-content/uploads/2014/01/Figure1-JasperSoft-Studio.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="assets/Figure1-JasperSoft-Studio.png" height="474" width="640" /></a></div>
+<p></div>
+<div class="MsoNormal">
+Follow the following&nbsp;<br />
+steps to implement scriptlets in&nbsp;<br />
+JasperSoft Studio</div>
+<div class="MsoNormal">
+</div>
+<ol style="text-align: left;">
+<li>&nbsp;Add the Scriptlet jar file in the classpath by<br />
+clicking on the Project(Menu Bar) à<br />
+Properties, then select Java Build Path and external JAR File.</li>
+<li>&nbsp;Locate the Outline window</li>
+<li>&nbsp;There is a node called Scriptlet, expand the<br />
+node and we could see REPORT_SCRIPTLET</li>
+<li>&nbsp;You can create a another scriptlet label by<br />
+right clicking the scriptlet label and then select Create Scriptlet <b>(As in Fig 1)</b></li>
+<li>Now locate the new element called Scriptlet_1<br />
+under the node SCRIPTLETS.</li>
+<li>&nbsp;Navigate to the properties of the Scriptlet_1<br />
+there could be seen Name, Class and Description.</li>
+<li>Now you can enter the desired name for the<br />
+scriptlet.</li>
+<li>&nbsp;Class is the fully qualified path of the<br />
+scriptlet class in the JAR File.</li>
+<li>&nbsp;Description is for the describing the role of<br />
+the scriptlet.&nbsp;<b> (As in Fig 2)</b></li>
+</ol>
+<p></p>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+<a href="http://reportlingo.com/wp-content/uploads/2014/01/Figure1-JasperSoft-Studio1.png" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="assets/Figure1-JasperSoft-Studio1.png" height="443" width="640" /></a></div>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+Now until now we have success fully linked the scriptlet JAR<br />
+with the iReport/JasperSoft Studio, now we need to understand that how can it<br />
+be used in the report in order to get the desired outputs from the scriptlet or<br />
+basically from the JAVA end.</div>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+To use the scriptlet functions in either iReport/ JasperSoft<br />
+Studio following are the steps:</div>
+<div class="MsoNormal">
+</div>
+<ol style="text-align: left;">
+<li>&nbsp;When we successfully create a new scriptlet<br />
+under the scriptlet node, and define the properties of the scriptlet we<br />
+could&nbsp; see a new parameter formed under<br />
+the Parameter node.</li>
+<li>&nbsp;Locate the scriptlet parameter, you can find the<br />
+parameter as by default it is named as&nbsp;( {name of the scriptlet<br />
+defined}_SCRIPTLET )</li>
+<li>Then wherever you want to use any function of<br />
+the scriptlet, you just need to use as:<br />( {name of the scriptlet defined}_SCRIPTLET ).function Name</li>
+</ol>
+<p></p>
+<div class="MsoNormal">
+</div>
+<div class="MsoNormal">
+That is all we need to implement to use scriptlet in Jasper<br />
+Reports, hope that the above description and methodology helps to grasp<br />
+important points.</div>
+<div class="MsoNormal">
+<br />
+Here is a sample using the sample database, you can try the above customization too.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="https://drive.google.com/file/d/0B4yFyF_EORB_cGhrQ1ZzMDh6eGc/edit?usp=sharing" target="_blank"> ======SAMPLE========</a></p>
+<p></div>
+<div class="MsoNormal">
+Hope this clears your doubt for this topic. Still if you face<br />
+any issues or problems then you can add a comment below.</div>
+<div class="MsoNormal">
+</div>
+<p></p>
+<div class="MsoNormal">
+Happy Coding!!</div>
+</div>

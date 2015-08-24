@@ -1,0 +1,93 @@
+---
+layout: post
+title: How to export and import a  Jasper Server Repository on a remote system
+date: 2015-01-20 12:33:00.000000000 +05:30
+categories: []
+tags:
+- export
+- import
+- Jasper Server
+- jaspersoft
+- linux
+- PuTTy
+- tutorial
+- winSCP
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '5153216091257019330'
+  blogger_author: g116451164261752827176
+  blogger_comments: '0'
+  blogger_permalink: /2015/01/how-to-export-and-import-jasper-server.html
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+In this blog I have explained the steps to import and export the JasperServer Repository (In the steps below I have used a Remote Linux Machines accessed via windows machine)</p>
+<p>Before following the steps there would be requirement of following softwares-<br />
+1. WinSCP - To browse the files in Linux machine<br />
+2. PuTTy - To run the commands for export/import in the Linux shell</p>
+<div>
+</div>
+<div>
+</div>
+<div>
+</div>
+<div>
+<div>
+Steps Export reports in Jasper Reports</div>
+<div>
+</div>
+<div>
+1. Open PuTTy - and key in the IP address&nbsp;</div>
+<div>
+2. Enter the username and password.</div>
+<div>
+3. Navigate to the folder /opt/jasperreport-server-5.0/buildomatic</div>
+<div>
+4. Run the command &nbsp;./js-export.sh --uris &lt;Path of the Report&gt; &nbsp;--output-dir &lt;Name of the folder to be exported&gt;</div>
+<div>
+5. Open the WinSCP, and key in the &nbsp;IP Address as well as the credentials and set the Protocol as SFTP .</div>
+<div>
+6. Navigate to the folder /opt/jasperreport-server-5.0/buildomatic</div>
+<div>
+7. Drag and drop the folder created earlier to the local machine.</div>
+</div>
+<div>
+</div>
+<div>
+</div>
+<div>
+</div>
+<div>
+<div>
+Steps Import reports in Jasper Reports</div>
+<div>
+</div>
+<div>
+1. Open the WinSCP, and key in the &nbsp;IP Address as well as the credentials and set the Protocol as SFTP .</div>
+<div>
+2. Navigate to the folder /opt/jasperreport-server-5.0/buildomatic</div>
+<div>
+3. Drag and drop the folder downloaded with the report.</div>
+<div>
+4. Now Open PuTTy - and key in the IP address&nbsp;</div>
+<div>
+5. Enter the username and password.</div>
+<div>
+6. Navigate to the folder /opt/jasperreport-server-5.0/buildomatic</div>
+<div>
+7. Run the command &nbsp;./js-import.sh --input-dir &lt;name of the folder copied earlier&gt;</div>
+</div>
+<div>
+</div>
+</div>

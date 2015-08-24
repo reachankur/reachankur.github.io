@@ -1,0 +1,52 @@
+---
+layout: post
+title: How to format number when running report from Java code in iReport
+date: 2013-12-06 06:06:00.000000000 +05:30
+categories: []
+tags:
+- iReport
+- jaspersoft
+- technical
+status: publish
+type: post
+published: true
+meta:
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_bid: '2279754227642197645'
+  blogger_id: '6856251349197516827'
+  blogger_author: g116451164261752827176
+  blogger_comments: '1'
+  blogger_permalink: /2013/12/how-to-format-number-when-running.html
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+There is always ambiguity that how could you format the data conditionally or at runtime of the report based upon the data in the iReport.</p>
+<p>iReport does provides a robust methodology to format the values of the textfield but sometime you require data to be formatted conditionally or needs to be formatted not at the design time but needs to be modified dynamically, that is, based upon the data coming from the datasource or upon the user choice. So this particular article is dedicated to cater this very problem.</p>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+The formatting done in the iReport is report specific it like extra utility , of providing the pattern provided by the iReport. When you run that in java code the formatting is removed. So what you can do for the java code is that you could use:</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+&nbsp;new java.text.DecimalFormat("pattern").format(put the field here)</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+So to provide similarity in the report and in the Java code what can be done is that you could replace the expression of the text field with the same expression and the discrepancy could be easily taken care off.In that case the expression would look something like this</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+&nbsp;new java.text.DecimalFormat("¤ #,##0").format($F{VALUE}) &nbsp;&nbsp;</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Now here the in the field expression easily , any field or parameter could be put and same would work fine for java code too,</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Here any pattern can be put, and formatting could be applied to any described field.</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Cheers Happy Coding....!!</div>
+</div>

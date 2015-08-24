@@ -1,0 +1,81 @@
+---
+layout: post
+title: How to add user defined function in iReport
+date: 2013-12-06 06:55:00.000000000 +05:30
+categories: []
+tags:
+- iReport
+- Jasper-Java Integration
+- jaspersoft
+- Report Scriptlet
+- Scriptlet
+- technical
+- User Defined functions
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '3729705796966639719'
+  blogger_author: g116451164261752827176
+  blogger_comments: '17'
+  blogger_permalink: /2013/12/jasperScriptletIntegration.html
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+In iReport it is very important to have a knowledge of integrating the Java code with the Jasper Report as the things do easier and provide lot of versatility to the report. Usage of Java Code in iReport is achieved by usage of scriptlets.</p>
+<p>Scriptlets acts as bridge to get the Java Code in the iReport, scriptlet is a Java class which extends the JRDefaultScriptlet, and in this class we could write our user defined functions which later could be easily accessed in the report.</p>
+<p>
+There are few simple steps which could be followed in order to run the User Defined Functions.</p>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+1. <b>Tools</b>(in the iReport Menu bar ) -----&gt; &nbsp;<b>Options </b>-----&gt; Click on <b>Claspath </b>Tab ------&gt; <b>ADD Jar</b> -----&gt; choose the Jar file ( This JAR is made on building the project containing the scriptlet )</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+2. Then in the iReport there is a node called <b>Scriptlet </b>in the<b> Report Inspector</b> ( By Default on left ).</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+3. Go to the properties of the scriptlet , there is a property called '<b>Scriptlet Class</b>'</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+4. Key in the the location of the scriptlet class where the user defined function is present &nbsp;for instance:</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+<i>com.jasper.scriptlet.TestScriptlet -- In this scenario TestScriptlet is my class where the user defined function is written.</i></div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+(<b>Remember the the class containing the user defined function needs to be extended by the JRDefaultScriptlet )</b></div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+5. Now you are set to use it in the report, to use in the iReport you need to use the reference of a parameter called <b>$P{REPORT_SCRIPTLET} ,</b> this is a predefined parameter which could come handy.</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+&nbsp;6. In order to use the user defined in the iReport, in the the expression would be given as&nbsp;</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+&nbsp;<b>$P{REPORT_SCRIPTLET}&nbsp;.userDefinedFun() - &nbsp;</b>This is a user defined function which returns values from the scriptlet.</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+<b>$P{REPORT_SCRIPTLET}&nbsp;.userDefinedFun($F{field}) &nbsp;- </b>This is also a user defined function which returns values from scriptlet, but has an input parameter from the field in the report. So this gives fluidity of the Java from Jasper to Java code.</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Here is a running sample-</p>
+<p>Prerequesites- <br />
+1. <a href="https://drive.google.com/file/d/0B4yFyF_EORB_b1E5NnlTZXVMc0k/edit?usp=sharing" target="_blank">JRXML File</a><br />
+2. <a href="https://drive.google.com/file/d/0B4yFyF_EORB_LWJTYXI5VDBSYTQ/edit?usp=sharing" target="_blank">Jar File</a><br />
+3. <a href="https://drive.google.com/file/d/0B4yFyF_EORB_TS1nWjlFc0RXUGM/edit?usp=sharing" target="_blank">PDF Export</a>&nbsp; </p>
+<p>Steps to set up this Sample Report.</p>
+<div style="-webkit-text-stroke-width: 0px; color: black; font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 18px; margin: 1em 0px; orphans: auto; padding: 0px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px;">
+1. <b>Tools</b>(in the iReport Menu bar )-----&gt; <b>Options </b>----- &gt; Click on <b>Claspath </b>Tab ------&gt; ADD <b>Jar </b>-----&gt; choose the Jar file</div>
+<div style="-webkit-text-stroke-width: 0px; color: black; font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 18px; margin: 1em 0px; orphans: auto; padding: 0px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px;">
+2.&nbsp; Then navigate to <b>Scriptlet node </b>in the Report inspector, and then modify the property<b> Scriptlet Class</b> to <b>'pkg1.ConvertToWord'</b></div>
+<div style="-webkit-text-stroke-width: 0px; color: black; font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 18px; margin: 1em 0px; orphans: auto; padding: 0px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px;">
+3. Then you must choose <b>Sample Database</b> in the datasource</div>
+<div style="-webkit-text-stroke-width: 0px; color: black; font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 18px; margin: 1em 0px; orphans: auto; padding: 0px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px;">
+4. Then next you need to activate the the sample database from <b>Help</b>(in the iReport Menu bar)----&gt;<b>Samples</b>----&gt;<b>Run Sample Database</b></div>
+<div style="-webkit-text-stroke-width: 0px; color: black; font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 18px; margin: 1em 0px; orphans: auto; padding: 0px; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px;">
+5. Then Run the &nbsp;Report</div>
+<p>There is a PDF export also which would show exactly how the report looks.</p>
+<p>Please put in you queries/suggestions, I will be more than happy to know. </p></div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Cheers .. Happy Coding!!</div>
+</div>

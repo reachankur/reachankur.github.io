@@ -1,0 +1,134 @@
+---
+layout: post
+title: Fresh setup of Jasper Reports from scratch - For beginners
+date: 2015-01-12 12:38:00.000000000 +05:30
+categories: []
+tags:
+- beginners
+- installation
+- Jasper Server
+- jaspersoft
+- tutorial
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '137902766484209600'
+  blogger_author: g116451164261752827176
+  blogger_comments: '2'
+  blogger_permalink: /2015/01/fresh-setup-of-jasper-reports-from.html
+  blogger_thumbnail: http://2.bp.blogspot.com/-wcRnI36a7p8/VLO-87q65mI/AAAAAAAAGuI/bHn0xZYMAgw/s1600/xs1.png
+  _thumbnail_id: '44'
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+I have been thinking to compile &nbsp;a document which outlines the complete process of installation and setup of the connection because generally when one starts they do not find much of material and they tend to get stuck on a trivial issue.</p>
+<p>So the post will have two portions, namely Installation and Setup.</p>
+<div style="-webkit-text-stroke-color: rgb(79, 129, 189); -webkit-text-stroke-width: initial; color: #4f81bd; font-family: 'Trebuchet MS'; font-size: 16px; margin-bottom: 14px; text-align: justify;">
+<b><i><br /></i></b></div>
+<div style="-webkit-text-stroke-color: rgb(79, 129, 189); -webkit-text-stroke-width: initial; color: #4f81bd; font-family: 'Trebuchet MS'; font-size: 16px; margin-bottom: 14px; text-align: justify;">
+<b><i>Installation&nbsp;</i></b></div>
+<div style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin-bottom: 10px; min-height: 19px;">
+</div>
+<div style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin-bottom: 10px;">
+This document will apprise you with the basic installation software, which would act as a prerequisite to run Jasper Report.</div>
+<ol>
+<li style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin: 0px 0px 10px;"><b>Java</b> –<br />
+As Jasper Reports is built on Java platform, so a proper installation of Java Development kit (jdk) is required. For official steps to install java one can refer to the link<br />
+<a href="https://www.java.com/en/download/help/windows_manual_download.xml%2520">https://www.java.com/en/download/help/windows_manual_download.xml</a> 
+</li>
+<li style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin: 0px 0px 10px;"><b>iReport Designer</b> –<br />
+This is a third party Jasper Report designing software. iReport is the most popular visual designer tool for JasperReports Library and JasperReports Server (Business Intelligence).<br />
+The software can be downloaded in an exe run able format for windows machine, or other types of files as per the platform demands.<br />
+<a href="http://community.jaspersoft.com/project/ireport-designer/releases">http://community.jaspersoft.com/project/ireport-designer/releases</a></p>
+</li>
+<li style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin: 0px 0px 10px;"><b>Jasper Server</b> – <br />
+This is the software which acts as the interface which provides web touch to the reports rather makes it interactive in terms of external links and the drill downs<br />
+Below is the link from where the file could be downloaded.<br />
+<a href="http://community.jaspersoft.com/project/jasperreports-server/releases">http://community.jaspersoft.com/project/jasperreports-server/releases</a></p>
+</li>
+<li style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin: 0px 0px 10px;"><b>Database&nbsp; Server</b> -<br />
+The database server or the datasource which serves the purpose of feeding data to the report, in this projects case the setup was in the SQL Server 2008, which could vary from project to project .<br />
+&nbsp;</li>
+<li style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin: 0px 0px 10px;"><b>Netbeans(Optional)</b> –</li>
+</ol>
+<p></p>
+<div style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin-bottom: 10px; margin-left: 36px;">
+Netbeans is the development environment where in you could create sciptlets for customization purposes in the Jasper Reports. You could even go on to make customizations on the charts, where in you could use the <br />
+<a href="https://netbeans.org/downloads/">https://netbeans.org/downloads/</a> (Download the SE version)</div>
+<div>
+</div>
+<div>
+</div>
+<div>
+</div>
+<div>
+<div style="-webkit-text-stroke-color: rgb(79, 129, 189); -webkit-text-stroke-width: initial; color: #4f81bd; font-family: 'Trebuchet MS'; font-size: 16px; margin-bottom: 14px; text-align: justify;">
+<b><i>Setup and Connection</i></b></div>
+<div style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin-bottom: 10px; min-height: 19px;">
+</div>
+<div style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin-bottom: 10px;">
+Below are the steps for the setup, which would act as a prerequisite to run Jasper Report.</div>
+<ol>
+<li style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin: 0px 0px 10px;"><b>Java</b> –<br />
+Download and install java 7, please do mind not to install Java 8 as it is yet not supported by iReport. 
+</li>
+<li style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin: 0px 0px 10px;"><b>iReport Designer</b> –<br />
+After installing the iReport, first thing you need to do is that the inclusion of java connector </p>
+<p><b>Below is the process to include the Java Connector</b> </p>
+<p>i.&nbsp; Download the Java connector for the Datasource, as we have the SQL Server datasource we need to download <br />
+<a href="http://www.java2s.com/Code/Jar/s/Downloadsqljdbc120jar.htm">http://www.java2s.com/Code/Jar/s/Downloadsqljdbc120jar.htm</a><br />
+For more info on the Connector follow the link -- <a href="https://docs.oracle.com/cd/E19501-01/819-3658/gcfoy/index.html">https://docs.oracle.com/cd/E19501-01/819-3658/gcfoy/index.html</a></p>
+<p>ii.&nbsp; Navigate to Tools—&gt; Options  Classpath<br />
+And select the Add JAR, and then browse to the downloaded path of the connector </p>
+<p><b>Now we&nbsp; need to add a JDBC datasource</b></p>
+<p>i. Click on&nbsp; the icon shown below on the top of the iReport window</li>
+</ol>
+<div>
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://reportlingo.com/wp-content/uploads/2015/01/xs1.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="assets/xs1.png" height="42" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div>
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<ol>
+<li style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin: 0px 0px 10px;">
+ii.&nbsp; In the popup select New  Select The Datasource type as Database JDBC Connection</p>
+<p>iii. Now Enter the name of the connection, select the SQL Server driver and enter the name of the database in the url of the database, also key in your credentials, refer to the screenshot below</p>
+<p><a href="http://reportlingo.com/wp-content/uploads/2015/01/xs11.png" imageanchor="1" style="font-family: Times; font-size: 11px; margin-left: 1em; margin-right: 1em; text-align: center;"><img border="0" src="assets/xs11.png" height="400" width="342" /></a></p>
+<p>iv. Now test the connection, it will say the connection successful.</p>
+<p>We are now ready to create reports.</p>
+</li>
+<li style="-webkit-text-stroke-color: rgb(0, 0, 0); -webkit-text-stroke-width: initial; margin: 0px 0px 10px;"><b>Jasper Server</b> – <br />
+After installation in order to run Jasper Server open the browser and key in<br />
+localhost:8080/jasperserver<br />
+Then login using the credentials jasperadmin/jasperadmin</p>
+<p>Then setup the connection, righ click on the node and add a datasource<br />
+Enter the details below,&nbsp; for the connector and setup the datasource.</li>
+</ol>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://reportlingo.com/wp-content/uploads/2015/01/xs12.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="assets/xs12.png" height="206" width="400" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: left;">
+The above steps are pretty basic and gives a fair idea as to what all basic necessities are there to process the installation and setup.</div>
+<div>
+</div>
+</div>
+</div>

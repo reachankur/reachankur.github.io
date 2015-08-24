@@ -1,0 +1,165 @@
+---
+layout: post
+title: How to set JavaBean set as Datasource in iReports, along with a working sample.
+date: 2013-12-20 11:29:00.000000000 +05:30
+categories: []
+tags:
+- bean
+- bean as datasource
+- iReport
+- jaspersoft
+- technical
+- tutorial
+- video
+- walkthrough
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '2967599333371419445'
+  blogger_author: g116451164261752827176
+  blogger_comments: '2'
+  blogger_permalink: /2013/12/java-beanset-datasource.html
+  blogger_thumbnail: http://1.bp.blogspot.com/-kRCYrv4FigE/UrQk3qR8K9I/AAAAAAAAAYw/bH2zTQQcZHk/s400/Untitled.png
+  _thumbnail_id: '73'
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+Java beans are practically,  classes that encapsulate many objects into a single object (the bean). This is pretty simple to create and could easily hold lots of data in them. They are serializable, have a 0-argument constructor, and allow access to properties using getter and setter methods.</p>
+<div>
+</div>
+<div>
+In a nutshell, java bean is easy to use methodology to obtain data. Now the task in hand is that how to use this bean in our reports . For setting the bean in reports there are few prerequisites,&nbsp;</div>
+<div>
+</div>
+<div>
+<ol style="text-align: left;">
+<li>There should be a Bean class</li>
+<li>There should be a factory class which returns the collection/array of the beans</li>
+</ol>
+<div>
+iReport provides two options, either it could read from collection of beans or array of beans. First of all we need a bean, so below is how the bean looks like.</div>
+</div>
+<blockquote style="background-color: lavender; width: 400px;"><p>
+/**<br />
+* Bean<br />
+* <br />
+* @author Ankur Gupta<br />
+*/<br />
+public class PersonBean {<br />
+private String name = ""; <br />
+private int age = 0;<br />
+public PersonBean(String name, int age) {<br />
+this.name = name;<br />
+this.age = age;<br />
+}<br />
+public int getAge() {<br />
+return age;<br />
+}<br />
+public String getName() {<br />
+return name;<br />
+}<br />
+}
+</p></blockquote>
+<div>
+<br />
+Now you need to create a factory class which contains the function which returns the bean.There are two ways to do that :<br />
+1. Collection of bean</p>
+</div>
+<div>
+<blockquote style="background-color: lavender; width: 400px;"><p>
+/** <br />
+* Responsible for filling values in the Bean and return it as collection of bean.<br />
+*<br />
+* @author Ankur Gupta<br />
+*/<br />
+public class TestFactory {</p>
+<p>public static java.util.Collection generateCollection() {<br />
+// Creates the collection<br />
+java.util.Vector collection = new java.util.Vector();</p>
+<p>// Adds the values in the bean and adds it into the collection<br />
+collection.add(new PersonBean("Ted", 20));<br />
+collection.add(new PersonBean("Jack", 34));<br />
+collection.add(new PersonBean("Bob", 56));<br />
+collection.add(new PersonBean("Alice", 12));<br />
+collection.add(new PersonBean("Robin", 22));<br />
+collection.add(new PersonBean("Peter", 28));</p>
+<p>// returns the collection of beans.<br />
+return collection;<br />
+}<br />
+}</p></blockquote>
+<p>2. Array of Beans</p>
+<blockquote style="background-color: lavender; width: 400px;"><p>
+/** <br />
+* Responsible for filling values in the Bean and return it as collection of bean.<br />
+*<br />
+* @author Ankur Gupta<br />
+*/<br />
+public class TestFactory {</p>
+<p>// Creates the Arraylist<br />
+PersonBean[] list = new PersonBean[6];</p>
+<p>// Adds the values in the bean and adds it into the Array<br />
+list[0]= (new PersonBean("Ted", 20));<br />
+list[1]= (new PersonBean("Jack", 34));<br />
+list[2]= (new PersonBean("Bob", 56));<br />
+list[3]= (new PersonBean("Alice", 12));<br />
+list[4]= (new PersonBean("Robin", 22));<br />
+list[5]= (new PersonBean("Peter", 28));</p>
+<p>// returns the Array of beans.<br />
+return list;<br />
+}<br />
+}</p></blockquote>
+<p>
+Now, we need to compile these files &nbsp;and put the generated jar file in the classpath of the iReport.</p>
+<p>Next we need to set the datasource, by adding datasource Java Bean set as datasource and fill in the Factory class as well as the function which generates the bean as array or collection, whichever suits our purpose.</p>
+<p>In this case:<br />
+<b>Factory class </b>&nbsp;: &nbsp;javabeanset.TestFactory<br />
+<b>Generating function</b>: generateBeanArray/generateCollection (based upon collection or array)<br />
+Below are some screen shots.</p>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;">
+<tbody>
+<tr>
+<td style="text-align: center;"><a href="http://1.bp.blogspot.com/-kRCYrv4FigE/UrQk3qR8K9I/AAAAAAAAAYw/bH2zTQQcZHk/s1600/Untitled.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="400" src="assets/Untitled3.png" width="345" /></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align: center;">Array of JavaBeans</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;">
+<tbody>
+<tr>
+<td style="text-align: center;"><a href="http://4.bp.blogspot.com/-wtHdWNEB30o/UrQlOM5YsNI/AAAAAAAAAY4/yXihZsrIWmU/s1600/Untitled.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="400" src="assets/Untitled4.png" width="340" /></a></td>
+</tr>
+<tr>
+<td class="tr-caption" style="text-align: center;">Collection&nbsp;of JavaBeans</td>
+</tr>
+</tbody>
+</table>
+<p>
+You can follow the video link for setting javabeans as datasource. &nbsp;Here is the Youtube video made by me which gives a complete walkthrough to set the datasource as javabean with the help of a sample report also.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="http://www.youtube.com/watch?v=ZMHYwlDcrN0" target="_blank">==The video link==</a></p>
+<p>I have made a sample in the video itself here is zip file which contains:<br />
+1, Jar File (You need to place this in your classpath)<br />
+2. JRXML File<br />
+3. Set datasource as shown in the video and insert the values provided in the above screenshots.<br />
+4. Test Run PDF(PDF output of the Sample report)<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a href="https://drive.google.com/file/d/0B4yFyF_EORB_U3R0Uy12SE5SNWM/edit?usp=sharing" target="_blank"> == ZIP Sample File ==</a><br />
+Follow all the steps in order to get the sample working.</p>
+<p>
+Hope this clears your doubt for this topic. Still if you face any issues or problems then you can add a comment below .</p>
+<p>Happy Coding.!!</p>
+</div>
+</div>

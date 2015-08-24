@@ -1,0 +1,286 @@
+---
+layout: post
+title: How to display the Username of the user who logged into JasperServer
+date: 2014-03-24 11:09:00.000000000 +05:30
+categories: []
+tags:
+- iReport
+- Jasper Server
+- jaspersoft
+- JasperSoft Studio
+- technical
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '6727711070403897937'
+  blogger_author: g116451164261752827176
+  blogger_comments: '0'
+  blogger_permalink: /2014/03/how-to-display-username-of-user-who.html
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div style="background-color: white; font-family: Verdana, Arial, Calibri, sans-serif; font-size: 11px;">
+Many a times we require the name of the person who logged into the Jasper Server and according to this information we are able to show/hide the elements on report, or simpley to log the user name we can use it.</div>
+<div style="background-color: white; font-family: Verdana, Arial, Calibri, sans-serif; font-size: 11px;">
+<br type="_moz" /></div>
+<div style="background-color: white; font-family: Verdana, Arial, Calibri, sans-serif; font-size: 11px;">
+So how to achieve this ?&nbsp;</div>
+<div style="background-color: white; font-family: Verdana, Arial, Calibri, sans-serif; font-size: 11px;">
+<br type="_moz" /><br /></p>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+We can create parameters in our report, with a specific name and datatype. Then these parameters will be automatically filled when the report is executed by JasperReports Server.</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+<b>LoggedInUsername</b> (java.lang.String), with no default value. Then, we can use $P{LoggedInUsername} in a text field, in a query, in a printWhenExpression, etc ...</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+This is a built in parameter which gets filled with the User Details when report is run on Jasper Server.</div>
+</div>
+<div style="background-color: white; color: #666666; font-family: Verdana, Arial, Calibri, sans-serif; font-size: 11px;">
+</div>
+<div style="background-color: white; font-family: Verdana, Arial, Calibri, sans-serif; font-size: 11px;">
+<strong>Note that the report if run in iReport, would get a null value. So for the correct results it is necessary that we deploy the report onto JasperServer.</strong></div>
+<div style="background-color: white; color: #666666; font-family: Verdana, Arial, Calibri, sans-serif; font-size: 11px;">
+</div>
+<div style="background-color: white; color: #666666; font-family: Verdana, Arial, Calibri, sans-serif; font-size: 11px;">
+</div>
+<div style="background-color: white; color: #666666; font-family: Verdana, Arial, Calibri, sans-serif; font-size: 11px;">
+<div class="MsoNormal" style="margin-bottom: 0.0001pt;">
+</div>
+<table border="1" cellpadding="0" cellspacing="0" class="MsoTableLightShadingAccent3" style="border-collapse: collapse; border: none; mso-border-bottom-alt: solid #9BBB59 1.0pt; mso-border-bottom-themecolor: accent3; mso-border-top-alt: solid #9BBB59 1.0pt; mso-border-top-themecolor: accent3; mso-padding-alt: 0in 5.4pt 0in 5.4pt; mso-yfti-tbllook: 1184; width: 100%px;">
+<tbody>
+<tr>
+<td style="border-bottom: solid #9BBB59 1.0pt; border-left: none; border-right: none; border-top: solid #9BBB59 1.0pt; mso-border-bottom-themecolor: accent3; mso-border-top-themecolor: accent3; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div align="center" class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 5; text-align: center;">
+<b>Parameter Name</b><b></b></div>
+</td>
+<td style="border-bottom: solid #9BBB59 1.0pt; border-left: none; border-right: none; border-top: solid #9BBB59 1.0pt; mso-border-bottom-themecolor: accent3; mso-border-top-themecolor: accent3; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div align="center" class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 1; text-align: center;">
+<b>Type</b><b></b></div>
+</td>
+<td style="border-bottom: solid #9BBB59 1.0pt; border-left: none; border-right: none; border-top: solid #9BBB59 1.0pt; mso-border-bottom-themecolor: accent3; mso-border-top-themecolor: accent3; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div align="center" class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 1; text-align: center;">
+<b>Notes</b><b></b></div>
+</td>
+<td style="border-bottom: solid #9BBB59 1.0pt; border-left: none; border-right: none; border-top: solid #9BBB59 1.0pt; mso-border-bottom-themecolor: accent3; mso-border-top-themecolor: accent3; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 68;">
+<b>LoggedInUser</b></div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+User</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+Not usable in query<br />
+  input control,<br />
+  &nbsp;but is used as&nbsp;parameter to report</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 4;">
+<b>LoggedInUsername</b></div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+String</div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+Of logged in user</div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 68;">
+<b>LoggedInUserFullName</b></div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+String</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+Of logged in user</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 4;">
+<b>LoggedInUserEmailAddress</b></div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+String</div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+Of logged in user</div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 68;">
+<b>LoggedInUserEnabled</b></div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+Boolean</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+Is logged in user<br />
+  enabled?</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 4;">
+<b>LoggedInUserExternallyDefined</b></div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+Boolean</div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+Is logged in user<br />
+  externally defined?<br />
+  &nbsp;ie. authenticated externally</div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 68;">
+<b>LoggedInUserTenantId</b></div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+String</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+Of logged in user.<br />
+  Only relevant in&nbsp;<br />
+  Pro/Enterprise.</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 4;">
+<b>LoggedInUserRoles</b></div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+Collection&lt;string&gt;</div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+Current set of roles<br />
+  of logged in user.&nbsp;<br />
+  Useful for $X parameter</div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 68;">
+<b>LoggedInUserAttributes</b></div>
+</td>
+<td nowrap="" style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+Map&lt;string,<br />
+  string&gt;</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+Not usable in query<br />
+  input control, but is&nbsp;<br />
+  used as parameter to report.<br />
+  &nbsp;Empty map if no attributes</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 4;">
+<b>LoggedInUserAttributeNames</b></div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+Collection&lt;string&gt;</div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+User profile<br />
+  attribute names. Useful for<br />
+  &nbsp;$X parameters.&nbsp;Empty collection if no&nbsp;<br />
+  attributes</div>
+</td>
+<td style="border: none; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 68;">
+<b>LoggedInUserAttributeValues</b></div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+Collection</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 64;">
+-</div>
+</td>
+<td style="background: #E6EED5; border: none; mso-background-themecolor: accent3; mso-background-themetint: 63; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+<tr>
+<td nowrap="" style="border-bottom: solid #9BBB59 1.0pt; border: none; mso-border-bottom-themecolor: accent3; padding: 0in 5.4pt 0in 5.4pt; width: 41.02%;" valign="top" width="41%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in; mso-yfti-cnfc: 4;">
+<b>LoggedInUserAttribute_&lt;attribute<br />
+  name&gt;</b></div>
+</td>
+<td style="border-bottom: solid #9BBB59 1.0pt; border: none; mso-border-bottom-themecolor: accent3; padding: 0in 5.4pt 0in 5.4pt; width: 19.34%;" valign="top" width="19%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+String</div>
+</td>
+<td style="border-bottom: solid #9BBB59 1.0pt; border: none; mso-border-bottom-themecolor: accent3; padding: 0in 5.4pt 0in 5.4pt; width: 37.2%;" valign="top" width="37%">
+<div class="MsoNormal" style="line-height: 13.5pt; margin-bottom: .0001pt; margin-bottom: 0in;">
+Attribute value for<br />
+  matched attribute name (like "att1") on the user.&nbsp;Empty string<br />
+  if no match.&nbsp;Only provided if defined&nbsp;in a query or as&nbsp;a<br />
+  report parameter.</div>
+</td>
+<td style="border-bottom: solid #9BBB59 1.0pt; border: none; mso-border-bottom-themecolor: accent3; padding: 0in 5.4pt 0in 5.4pt; width: 2.44%;" valign="top" width="2%"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="background-color: white; color: #666666; font-family: Verdana, Arial, Calibri, sans-serif; font-size: 11px;">
+</div>
+<div style="text-align: left;">
+Using the above parameters we could easily get various important information which could help in defining the roles.&nbsp;</div>
+<div style="text-align: left;">
+</div>
+<div style="text-align: left;">
+Happy Coding.!!</div>
+</div>

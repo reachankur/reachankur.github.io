@@ -1,0 +1,56 @@
+---
+layout: post
+title: How to execute Jasper Report through Java?
+date: 2013-09-25 13:42:00.000000000 +05:30
+categories: []
+tags:
+- iReport
+- jaspersoft
+- java
+- technical
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '2163095778367459023'
+  blogger_author: g116451164261752827176
+  blogger_comments: '0'
+  blogger_permalink: /2013/09/how-to-execute-jasper-report-through.html
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+I found a way for that by<em><strong>&nbsp;parsing the xml</strong></em>&nbsp;and then extracting the tags with <b>parameter </b>and retrieving the<em><strong>&nbsp;attribute name and class</strong></em>&nbsp;keeping in mind the check attribute&nbsp;<em><strong>&nbsp;isForPrompting is blank or not present for the parameters</strong></em>&nbsp;, In this way I got the Hashmap of all the parameters with their types and I put that in the parameterMap and hence fulfilling the parameters in the jrxml dynamically</p>
+<p></div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+The jars need to be included are-</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+1.commons-beanutils-x.x.x.jar</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+2.commons-collections-x.x.x.jar</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+3.commons-digester-x.x.jar</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+4.commons-logging-x.x.jar</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+5.groovy-all-x.x.x.jar</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+6.iText-x.x.x.jar</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+7.jasperreports-x.x.x.jar</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+8.poi-x.x.jar(for excel export)</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+9.jfreechart-x.x.x.jar</p>
+<p>
+Happy Coding!!</div>
+</div>

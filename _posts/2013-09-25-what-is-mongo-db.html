@@ -1,0 +1,79 @@
+---
+layout: post
+title: What is MONGO DB?
+date: 2013-09-25 13:32:00.000000000 +05:30
+categories: []
+tags:
+- M101J
+- MongoDB
+- technical
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '3824373304922881974'
+  blogger_author: g116451164261752827176
+  blogger_comments: '0'
+  blogger_permalink: /2013/09/what-is-mongo-db.html
+  blogger_thumbnail: http://2.bp.blogspot.com/-JWbcXkPlPKE/UkLYimigU7I/AAAAAAAAAMY/3uE5GHvmDpo/s320/replica-set-read-write-operations-primary.png
+  _thumbnail_id: '89'
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<b style="background-color: white; line-height: 19.1875px;">MongoDB</b>&nbsp;is a cross-platform&nbsp;document&nbsp;based&nbsp;system. Classified as a "NoSQL"database, MongoDB eschews the traditional&nbsp;relational database&nbsp;structure in favor of&nbsp;<a href="http://en.wikipedia.org/wiki/JSON" style="background-color: white; background-image: none; color: #0b0080; line-height: 19.1875px; text-decoration: none;" title="JSON">J</a>SON-like documents with dynamic schemas , making the integration of data in certain types of applications easier and faster.</p>
+<div>
+</div>
+<div>
+It is very&nbsp;interesting&nbsp;to work on a system which does not follow the conventional tantrums of relational DB, and curbing the obligation of maintaining &nbsp;a perfect table structure and keeping the relations intact. Now you need not worry for the same with MongoDB , you just have to create the collections to much of a surprise the collections here are dimensionless , what I mean is that there could be a scenario where in the first row you have 3 records and next you have 2, wherein the SQL table you need to specify all the fields for all the rows. For Instance :<br />
+As the data stored is in a form of a document so all the documents are like a JSON &nbsp;Document<br />
+{a:1,b:1,c:3},<br />
+{a:1},<br />
+{a:2,b:3},<br />
+{a:1,b:4,c:3,d:4}</p>
+<p>As you could see above , its dimensionless. Now the next question which would haunt you would be that how would the sorting, grouping and other aggregations can be done , so the answer is that MongoDB has an inbuilt feature which skips the rows which does not contain the queried field to sort.</p>
+<p>One might question that if there is no relational arrangement then how come the relations are maintained, but&nbsp;joy of a Document database is that it eliminates lots of Joins. Your first instinct should be to place as much in a single document as you can. Because MongoDB documents have structure, and because you can efficiently query within that structure there is no immediate need to normalize data like you would in SQL. In particular any data that is not useful apart from its parent document should be part of the same document.So the catch is you can put as much data in the parent document which has high frequency of access , but is required to be updated less . And the documents which needs lots of updates or require increments it could be placed in a small document. So in that way the data is arranged and that data is only accessed which needs to be retrieved.</p>
+<p>
+'<i>mongod</i>' This is a command line command to run the database instance , '<i>mongo</i>' is a command to run the mongo shell where in you could&nbsp;access&nbsp;you data ,'<i>mongos</i>' this command keeps the track of shard keys. When you have to access the data you have to run the database instance and then access the mongo shell .</p>
+<p>MongoDB provides a number of features that allow application developers and database administrators to customize&nbsp;the behavior of a sharded cluster or replica set deployment so that MongoDB may be more “data center aware,” or&nbsp;allow operational and location-based separation.</p>
+<p>MongoDB uses <b>write ahead logging</b> to an on-disk journal to guarantee write operation durability and to<br />
+provide crash resiliency. Before applying a change to the data files, MongoDB writes the change operation to the<br />
+journal. If MongoDB should terminate or encounter an error before it can write the changes from the journal to the&nbsp;<br />
+data files, MongoDB can re-apply the write operation and maintain a consistent state.</p>
+<p>The MongoDB <b>aggregation framework</b> provides a means to calculate aggregated values without having to use mapreduce.While map-reduce is powerful, it is often more difficult than necessary for many simple aggregation tasks,such as totaling or averaging field values.<br />
+If you’re familiar with SQL, the aggregation framework provides similar functionality to GROUP BY and related<br />
+SQL operators as well as simple forms of “self joins.” Additionally, the aggregation framework provides projection<br />
+capabilities to reshape the returned data. Using the projections in the aggregation framework, you can add computed&nbsp;fields, create new virtual sub-objects, and extract sub-fields into the top-level of results.</p>
+<p>MongoDB supports unique <b>replication </b>feature which increases data availability with multiple copies of data on different database&nbsp;servers, replication protects a database from the loss of a single server. Replication also allows you to recover from&nbsp;hardware failure and service interruptions. With additional copies of the data, you can dedicate one to disaster recovery,&nbsp;reporting, or backup</p>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://2.bp.blogspot.com/-JWbcXkPlPKE/UkLYimigU7I/AAAAAAAAAMY/3uE5GHvmDpo/s1600/replica-set-read-write-operations-primary.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="261" src="assets/replica-set-read-write-operations-primary.png" width="320" /></a></div>
+<p>This feature gives and edge in the case when the primary DB fails, because mongoDB supports a unique feature , wherein it grants &nbsp;the secondary databases to perform an election amongst them to elect the primary database and then carry on the further transactions from that instance.</p>
+<p>
+Another great feature of MongoDB is Sharding, or horizontal scaling which divides the data set and distributes the data over multiple servers, or&nbsp;<b>shards</b>. Each shard is an independent database, and collectively, the shards make up a single logical database.&nbsp;<br />
+MongoDB also supports segregation based on functional parameters, to ensure that certain mongod&nbsp;instances are only used for reporting workloads or that certain high-frequency portions of a sharded collection only&nbsp;exist on specific shards.&nbsp;</div>
+<div>
+</div>
+<div>
+There is a limitation of MongoDB that it can have a document of maximum&nbsp;16mb&nbsp;,not greater than that , but to cater that '<b>GridFS</b>' is there- This breaks the document in several small chunks and index it accordingly . This proves handy when you have to store huge data like photos,etc.</div>
+<div>
+</div>
+<div>
+In my views it really fascinating to work on MongoDB ,to experience the NOSQL environment , it really great to provide flexibility in the database structure as the structure, relations have been the prime concern &nbsp;for the developers . I would certainly recommend the usage in order to provide wings to the application.</div>
+<div>
+</div>
+<div>
+Well one of the courses which I would recommend everyone is MongoDB for Developers M101J- &nbsp;&nbsp;<a href="https://education.mongodb.com/courses/10gen/M101J/2013_October/about" target="_blank">MongoDB for Developers M101J</a>. In the course nicely all the features are covered and explained , I will recommend everyone to complete this.</div>
+<div>
+</div>
+<div>
+Don't hesitate to add comments and questions if you have any doubts in the content , I will try to answer as soon as possible.<br />
+Cheers!!</div>
+</div>

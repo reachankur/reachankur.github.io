@@ -1,0 +1,59 @@
+---
+layout: post
+title: How to make global header and footer in Jasper Reports?
+date: 2013-09-25 13:52:00.000000000 +05:30
+categories: []
+tags:
+- iReport
+- jaspersoft
+- technical
+status: publish
+type: post
+published: true
+meta:
+  blogger_bid: '2279754227642197645'
+  blogger_blog: ankurthetechie.blogspot.com
+  blogger_id: '1639737794553355610'
+  blogger_author: g116451164261752827176
+  blogger_comments: '0'
+  blogger_permalink: /2013/09/how-to-make-global-header-and-footer-in.html
+author:
+  login: admin@reportlingo
+  email: ankur.gupta.aug@gmail.com
+  display_name: admin@reportlingo
+  first_name: Ankur
+  last_name: Gupta
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Hi,</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Suppose there are reports&nbsp;ABX,BNC and KLM&nbsp;&nbsp;which have a same header and footer Then what you can do is create a master Report suppose&nbsp;mainReport, in there you add 3 subreports in the&nbsp;details section&nbsp;and then &nbsp;and give the path of the the three reports ABX,BNC and KLM. &nbsp;</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+You will have to specify the input control in the mainReport which user will have to enter suppose&nbsp;REPORT_SELECTION.&nbsp;Now you will have to decide the disctinct codes for each of the subreports . Suppose in this case I assign codes as :</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+ABX-1<br />
+BNC-2<br />
+KLM-3&nbsp;</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+It &nbsp;would accept the 1,2,3 from the user as input from the user in the parameter $P{REPORT_SELECTION} on the basis of this very choice of user it will trigger the presence or absence of the subreport.(Here 1,2,3 are just the cases could be anything like A,B,C or name itself like "ABX","BNC","KLM"&nbsp;)</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Now to trigger the appearance of the subreport on the basis of this parameter $P{REPORT_SELECTION} ,which is entered by user we need to write the print when expression. The printwhen expression(which you would find in the property of the subreport element) you need to specify it as &nbsp;:&nbsp;$P{REPORT_SELECTION} &nbsp;==1&nbsp;(This will be for the report&nbsp;ABX&nbsp;). So in this way the expression will vary. and you will get the desired subreport.</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Please keep in mind that in the subreports header and footer is removed .</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+Here the input control REPORT_SELECTION is included on the mainReport so would be global too, and even you could accept the values of other parameters required by the reports and then pass it on to the subreports.So the parameters or input controls would be turned global too.</div>
+<div style="font-family: Arial, Helvetica, 'Nimbus Sans L', FreeSans, sans-serif; font-size: 14px; line-height: 18px; margin-bottom: 1em; margin-top: 1em; padding: 0px;">
+<div style="line-height: 13.5pt; margin-bottom: .0001pt; margin: 0in;">
+Hope that<br />
+above explanation helps .</div>
+<div style="line-height: 13.5pt; margin-bottom: .0001pt; margin: 0in;">
+</div>
+<p></p>
+<div style="line-height: 13.5pt; margin-bottom: .0001pt; margin: 0in;">
+Happy<br />
+Coding!!</div>
+</div>
+</div>
